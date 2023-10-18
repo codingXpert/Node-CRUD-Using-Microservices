@@ -14,6 +14,19 @@ const getAll = async(req, res) => {
     }
 }
 
+const getById = async(req, res) => {
+    try {
+        const books = await Books.findById(req.params.id);
+        if(!books){
+            return res.send("No book is available")
+        }else{
+            return res.send(books);
+        } 
+    } catch (error) {
+       return res.send(error);
+    }
+}
+
 const create = async (req, res) => {
     try {
         const newBook = await Book.create(req.body);
@@ -30,5 +43,6 @@ const create = async (req, res) => {
 
 module.exports = {
     getAll,
-    create
+    create,
+    getById
 }
