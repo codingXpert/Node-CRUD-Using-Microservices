@@ -40,9 +40,23 @@ const create = async (req, res) => {
     }
 }
 
+const remove = async (req, res) => {
+    try {
+        const book = await Books.findById(req.params.id);
+        if (book) { 
+            await Book.deleteOne(book);
+            return res.send({ message: "Deleted Successfully" });
+        } else {
+            return res.send({ message: "No Book Available By This Id" });
+        }
+    } catch (error) {
+        return res.status(400).send({ message: error.message });
+    }
+}
 
 module.exports = {
     getAll,
     create,
-    getById
+    getById,
+    remove
 }
