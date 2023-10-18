@@ -1,7 +1,17 @@
+const Books = require("../models/books");
 const Book = require("../models/books");
 
-const getAll = (req, res) => {
-    return res.send("This is book service");
+const getAll = async(req, res) => {
+    try {
+        const books = await Books.find({});
+        if(!books){
+            return res.send("No book is available")
+        }else{
+            return res.send(books);
+        } 
+    } catch (error) {
+       return res.send(error);
+    }
 }
 
 const create = async (req, res) => {
