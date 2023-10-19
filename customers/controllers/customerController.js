@@ -13,7 +13,21 @@ const create = async (req, res) => {
     }
   };
 
+  const getAll = async (req, res) => {
+    try {
+      const customers = await Customer.find({});
+      if (!customers) {
+        return res.send("No customers is available");
+      } else {
+        return res.send(customers);
+      }
+    } catch (error) {
+      return res.send(error);
+    }
+  };
+
   module.exports = {
-    create
+    create,
+    getAll
   }
   
