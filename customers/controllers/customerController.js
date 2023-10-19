@@ -53,12 +53,27 @@ const create = async (req, res) => {
     }
   };
 
-  
+
+  const remove = async (req, res) => {
+    try {
+      const customer = await Customer.findById(req.params.id);
+      if (customer) {
+        await Customer.deleteOne(customer);
+        return res.send({ message: "Deleted Successfully" });
+      } else {
+        return res.send({ message: "No customer Available By This Id" });
+      }
+    } catch (error) {
+      return res.status(400).send({ message: error.message });
+    }
+  };
+
 
   module.exports = {
     create,
     getAll,
     getById,
-    update
+    update,
+    remove
   }
   
