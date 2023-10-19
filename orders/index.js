@@ -4,7 +4,7 @@ const db = require('./config/mongoose');
 db();
 
 app.use(express.json());
-
+app.use("/", require("./routes"));
 
 app.listen(8002, (err) => {
     if(err){
