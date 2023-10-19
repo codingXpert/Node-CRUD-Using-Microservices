@@ -13,6 +13,20 @@ const create = async (req, res) => {
     }
   };
 
+  const getAll = async (req, res) => {
+    try {
+      const orders = await Order.find({});
+      if (!orders) {
+        return res.send("No orders is available");
+      } else {
+        return res.send(orders);
+      }
+    } catch (error) {
+      return res.send(error);
+    }
+  };
+
   module.exports = {
-    create
+    create,
+    getAll
   }
