@@ -39,9 +39,26 @@ const create = async (req, res) => {
     }
   };
 
+  const update = async (req, res) => {
+    try {
+      const customer = await Customer.findById(req.params.id);
+      if (!customer) {
+        return res.send({ message: "No customer Available By This Id" });
+      } else {
+        await Customer.updateOne(req.body);
+        res.send({ message: "Updated Successfully" });
+      }
+    } catch (error) {
+      return res.status(400).send({ message: error.message });
+    }
+  };
+
+  
+
   module.exports = {
     create,
     getAll,
-    getById
+    getById,
+    update
   }
   
