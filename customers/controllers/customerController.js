@@ -26,8 +26,22 @@ const create = async (req, res) => {
     }
   };
 
+  const getById = async (req, res) => {
+    try {
+      const customers = await Customer.findById(req.params.id);
+      if (!customers) {
+        return res.send("No customers is available");
+      } else {
+        return res.send(customers);
+      }
+    } catch (error) {
+      return res.send(error);
+    }
+  };
+
   module.exports = {
     create,
-    getAll
+    getAll,
+    getById
   }
   
